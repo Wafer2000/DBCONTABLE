@@ -1,20 +1,154 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-text>
+      <h5><strong>REGISTRO DE DATOS</strong></h5>
+    </ion-text>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content>
+  <ion-card *ngFor="let nuevos of datos" class="data-row">
+    <ion-row class="header-row">
+      <ion-col size="12">
+        <div style="margin: 10px   10px;">
+          <ion-text>
+            <h6><strong>ID: </strong>{{nuevos.id}}</h6>
+          </ion-text>
+        </div>
+        <div style="margin: 10px   10px;">
+          <ion-text>
+            <h6><strong>NOMBRES: </strong>{{nuevos.nombres}}</h6>
+          </ion-text>
+        </div>
+        <div style="margin: 10px   10px;">
+          <ion-text>
+            <h6><strong>APELLIDOS: </strong>{{nuevos.apellidos}}</h6>
+          </ion-text>
+        </div>
+        <div style="margin: 10px   10px;">
+          <ion-text>
+            <h6><strong>CORREO: </strong>{{nuevos.correo}}</h6>
+          </ion-text>
+        </div>
+        <div style="margin: 10px   10px;">
+          <ion-text>
+            <h6><strong>CELULAR: </strong>{{nuevos.celular}}</h6>
+          </ion-text>
+        </div>
+        <div style="margin: 10px   10px;">
+          <ion-text>
+            <h6><strong>CEDULA: </strong>{{nuevos.cedula}}</h6>
+          </ion-text>
+        </div>
+        <div style="margin: 10px   10px;">
+          <ion-text>
+            <h6><strong>DIRECCION: </strong>{{nuevos.direccion}}</h6>
+          </ion-text>
+        </div>
+        <div style="margin: 10px   10px;">
+          <ion-text>
+            <h6><strong>TOTAL: </strong>{{nuevos.total}}</h6>
+          </ion-text>
+        </div>
+        <div style="margin: 10px   10px;">
+          <ion-text>
+            <h6><strong>FECHA: </strong>{{nuevos.fecha}}</h6>
+          </ion-text>
+        </div>
+        <div style="margin: 10px   10px;">
+          <ion-text>
+            <h6><strong>HORA: </strong>{{nuevos.hora}}</h6>
+          </ion-text>
+        </div>
+        <ion-col size="2">
+          <ion-buttons>
+            <ion-button (click)="nuevo = nuevos; enableNuevo = true" shape="round">
+              <ion-icon slot="end" name="brush" color="primary"></ion-icon>
+            </ion-button>
+            <ion-button (click)="deleteDatos(nuevos)" shape="round">
+              <ion-icon slot="end" name="trash-outline" color="danger"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-col>
+      </ion-col>
+    </ion-row>
+  </ion-card>
 </ion-content>
+<div>
+  <ion-item-divider>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="enableNuevo = false" shape="round">
+        <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <div>
+      <ion-button slot="start" (click)="nueva(); enableNuevo = true" color="success" shape="round">
+        NUEVO
+      </ion-button>
+    </div>
+  </ion-item-divider>
+  <div *ngIf="enableNuevo">
+    <ion-card>
+      <ion-item lines="none">
+        <ion-label position="floating">
+          <strong>ID</strong>
+        </ion-label>
+        <ion-input [(ngModel)]="nuevo.id" type="string" placeholder="Debe digitar el ID">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="floating">
+          <strong>NOMBRES</strong>
+        </ion-label>
+        <ion-textarea [(ngModel)]="nuevo.nombres" enterkeyhint type="text" placeholder="Debe digitar los nombres">
+        </ion-textarea>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="floating">
+          <strong>APELLIDOS</strong>
+        </ion-label>
+        <ion-textarea [(ngModel)]="nuevo.apellidos" enterkeyhint type="text" placeholder="Debe digitar los apellidos">
+        </ion-textarea>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="floating">
+          <strong>CORREO</strong>
+        </ion-label>
+        <ion-textarea [(ngModel)]="nuevo.correo" enterkeyhint type="email" placeholder="Debe digitar el correo">
+        </ion-textarea>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="floating">
+          <strong>CELULAR</strong>
+        </ion-label>
+        <ion-input [(ngModel)]="nuevo.celular" type="number" placeholder="Debe digitar el celular">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="floating">
+          <strong>CEDULA</strong>
+        </ion-label>
+        <ion-input [(ngModel)]="nuevo.cedula" type="number" placeholder="Debe digitar el cedula">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="floating">
+          <strong>DIRECCION</strong>
+        </ion-label>
+        <ion-input [(ngModel)]="nuevo.direccion" type="text" placeholder="Debe digitar el cedula">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="floating">
+          <strong>TOTAL</strong>
+        </ion-label>
+        <ion-input [(ngModel)]="nuevo.total" type="text" placeholder="Debe digitar el cedula">
+        </ion-input>
+      </ion-item>
+      <ion-button (click)="guardarDato()" color="primary" shape="round">
+        <ion-icon slot="end" name="save"></ion-icon>
+        Guardar
+      </ion-button>
+    </ion-card>
+  </div>
+</div>

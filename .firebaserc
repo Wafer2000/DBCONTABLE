@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "dbcontable"
+  },
+  "targets": {
+    "dbcontable": {
+      "hosting": {
+        "app": [
+          "dbcontable"
+        ]
+      }
+    }
+  }
+}
