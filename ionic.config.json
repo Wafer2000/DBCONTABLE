@@ -1,0 +1,7 @@
+{
+  "name": "dbcontable",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
