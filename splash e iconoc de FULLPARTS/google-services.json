@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1033133039613",
+    "project_id": "dbcontable",
+    "storage_bucket": "dbcontable.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1033133039613:android:8ff302e87616c3e52dc394",
+        "android_client_info": {
+          "package_name": "com.db.contable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1033133039613-2bhl6oikdb1fa05b65t34q78c6cilvp6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCV7HSmpslymzT6iFl0Z90incwcmia90IY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1033133039613-2bhl6oikdb1fa05b65t34q78c6cilvp6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
