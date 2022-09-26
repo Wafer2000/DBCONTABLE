@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center"><strong>INGRESE</strong></ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Ingrese los datos</ion-card-subtitle>
+    </ion-card-header>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating"><h3><strong>Correo:</strong></h3></ion-label>
+          <div>
+            <ion-text boolean="true">
+              <ion-textarea required="true" name="email" inputmode="email" [(ngModel)]="registro.email" ></ion-textarea>
+            </ion-text>
+          </div>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating"><h3><strong>Contraseña:</strong></h3></ion-label>
+          <div *ngIf="mostrar">
+            <ion-text boolean="true">
+              <ion-input required="true" name="contraseña" type="password" [(ngModel)]="registro.password" ></ion-input>
+            </ion-text>
+          </div>
+          <div *ngIf="!mostrar">
+            <ion-text boolean="true">
+              <ion-textarea required="true" name="contraseña" inputmode="text" [(ngModel)]="registro.password" ></ion-textarea>
+            </ion-text>
+          </div>
+          <ion-buttons slot="end">
+            <ion-button *ngIf="mostrar===true" (click)="mostrar=false">
+              <ion-icon name="eye-off-outline"></ion-icon>
+            </ion-button>
+            <ion-button *ngIf="mostrar===false" (click)="mostrar=true">
+              <ion-icon name="eye-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-card-content style="margin-bottom: 0px; border: 0px;">
+      <ion-button *ngIf="ingresarEnable" (click)="ingresar()" style="margin-bottom: 0px; border: 0px;" fixed shape="round">
+        Iniciar Sesion
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

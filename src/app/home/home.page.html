@@ -1,78 +1,430 @@
 <ion-header>
   <ion-toolbar>
     <ion-text>
-      <h5><strong>REGISTRO DE DATOS</strong></h5>
+      <h4><strong>REGISTRO DE DATOS</strong></h4>
     </ion-text>
+    <ion-buttons slot="end">
+      <ion-button (click)="Salir()" shape="round">
+        <ion-icon name="exit-outline" color="danger"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment value="Diario" scrollable="true" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="Diario">
+        <ion-label>Diario</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Semanal">
+        <ion-label>Semanal</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Quincenal1">
+        <ion-label>Primera Quincena</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Quincenal2">
+        <ion-label>Segunda Quincena</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Mensual">
+        <ion-label>Mensual</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Semestral1">
+        <ion-label>Primer Semestre</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Semestral2">
+        <ion-label>Segundo Semestre</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Anual">
+        <ion-label>Anual</ion-label>
+      </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let nuevos of datos" class="data-row">
-    <ion-row class="header-row">
-      <ion-col size="12">
-        <div style="margin: 10px   10px;">
-          <ion-text>
-            <h6><strong>ID: </strong>{{nuevos.id}}</h6>
-          </ion-text>
+  <ion-card *ngIf="selectedSegment === 'Diario'">
+    <ion-button expand="block" class="center-items" collapse="true" *ngIf="admin === true" (click)="excelExportDia()"
+      color="success" shape="round">
+      <ion-icon name="download" color="light"></ion-icon>
+    </ion-button>
+    <ion-card *ngFor="let nuevos of diario">
+      <ion-card-header>
+        <ion-card-title><strong>ID: </strong>{{nuevos.ID}}</ion-card-title>
+        <ion-card-subtitle><strong>Cedula: </strong>{{nuevos.CEDULA}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div>
+          <h4><strong>Nombres: </strong>{{nuevos.NOMBRES}}</h4>
         </div>
-        <div style="margin: 10px   10px;">
-          <ion-text>
-            <h6><strong>NOMBRES: </strong>{{nuevos.nombres}}</h6>
-          </ion-text>
+        <div>
+          <h4><strong>Apellidos: </strong>{{nuevos.APELLIDOS}}</h4>
         </div>
-        <div style="margin: 10px   10px;">
-          <ion-text>
-            <h6><strong>APELLIDOS: </strong>{{nuevos.apellidos}}</h6>
-          </ion-text>
+        <div>
+          <h4><strong>Celular: </strong>{{nuevos.CELULAR}}</h4>
         </div>
-        <div style="margin: 10px   10px;">
-          <ion-text>
-            <h6><strong>CORREO: </strong>{{nuevos.correo}}</h6>
-          </ion-text>
+        <div>
+          <h4><strong>Correo Electronico: </strong>{{nuevos.CORREO}}</h4>
         </div>
-        <div style="margin: 10px   10px;">
-          <ion-text>
-            <h6><strong>CELULAR: </strong>{{nuevos.celular}}</h6>
-          </ion-text>
+        <div>
+          <h4><strong>Total: </strong>{{nuevos.TOTAL}}</h4>
         </div>
-        <div style="margin: 10px   10px;">
-          <ion-text>
-            <h6><strong>CEDULA: </strong>{{nuevos.cedula}}</h6>
-          </ion-text>
+        <div>
+          <h4><strong>Direccion: </strong>{{nuevos.DIRECCION}}</h4>
         </div>
-        <div style="margin: 10px   10px;">
-          <ion-text>
-            <h6><strong>DIRECCION: </strong>{{nuevos.direccion}}</h6>
-          </ion-text>
+        <div>
+          <h4><strong>Fecha: </strong>{{nuevos.FECHA}}</h4>
         </div>
-        <div style="margin: 10px   10px;">
-          <ion-text>
-            <h6><strong>TOTAL: </strong>{{nuevos.total}}</h6>
-          </ion-text>
+        <div>
+          <h4><strong>Hora: </strong>{{nuevos.HORA}}</h4>
         </div>
-        <div style="margin: 10px   10px;">
-          <ion-text>
-            <h6><strong>FECHA: </strong>{{nuevos.fecha}}</h6>
-          </ion-text>
-        </div>
-        <div style="margin: 10px   10px;">
-          <ion-text>
-            <h6><strong>HORA: </strong>{{nuevos.hora}}</h6>
-          </ion-text>
-        </div>
-        <ion-col size="2">
+        <div *ngIf="admin">
           <ion-buttons>
             <ion-button (click)="nuevo = nuevos; enableNuevo = true" shape="round">
-              <ion-icon slot="end" name="brush" color="primary"></ion-icon>
+              <ion-icon name="brush" color="primary"></ion-icon>
             </ion-button>
             <ion-button (click)="deleteDatos(nuevos)" shape="round">
-              <ion-icon slot="end" name="trash-outline" color="danger"></ion-icon>
+              <ion-icon name="trash-outline" color="danger"></ion-icon>
             </ion-button>
           </ion-buttons>
-        </ion-col>
-      </ion-col>
-    </ion-row>
+        </div>
+      </ion-card-content>
+    </ion-card>
   </ion-card>
+  <ion-card *ngIf="selectedSegment === 'Semanal'">
+    <ion-button expand="block" class="center-items" collapse="true" *ngIf="admin === true" (click)="excelExportSem()"
+      color="success" shape="round">
+      <ion-icon name="download" color="light"></ion-icon>
+    </ion-button>
+    <ion-card *ngFor="let nuevos of semanal">
+      <ion-card-header>
+        <ion-card-title><strong>ID: </strong>{{nuevos.ID}}</ion-card-title>
+        <ion-card-subtitle><strong>Cedula: </strong>{{nuevos.CEDULA}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div>
+          <h4><strong>Nombres: </strong>{{nuevos.NOMBRES}}</h4>
+        </div>
+        <div>
+          <h4><strong>Apellidos: </strong>{{nuevos.APELLIDOS}}</h4>
+        </div>
+        <div>
+          <h4><strong>Celular: </strong>{{nuevos.CELULAR}}</h4>
+        </div>
+        <div>
+          <h4><strong>Correo Electronico: </strong>{{nuevos.CORREO}}</h4>
+        </div>
+        <div>
+          <h4><strong>Total: </strong>{{nuevos.TOTAL}}</h4>
+        </div>
+        <div>
+          <h4><strong>Direccion: </strong>{{nuevos.DIRECCION}}</h4>
+        </div>
+        <div>
+          <h4><strong>Fecha: </strong>{{nuevos.FECHA}}</h4>
+        </div>
+        <div>
+          <h4><strong>Hora: </strong>{{nuevos.HORA}}</h4>
+        </div>
+        <div *ngIf="admin">
+          <ion-buttons>
+            <ion-button (click)="nuevo = nuevos; enableNuevo = true" shape="round">
+              <ion-icon name="brush" color="primary"></ion-icon>
+            </ion-button>
+            <ion-button (click)="deleteDatos(nuevos)" shape="round">
+              <ion-icon name="trash-outline" color="danger"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-card>
+  <ion-card *ngIf="selectedSegment === 'Quincenal1'">
+    <ion-button expand="block" class="center-items" collapse="true" *ngIf="admin === true" (click)="excelExportQuin1()"
+      color="success" shape="round">
+      <ion-icon name="download" color="light"></ion-icon>
+    </ion-button>
+    <ion-card *ngFor="let nuevos of quincenal1">
+      <ion-card-header>
+        <ion-card-title><strong>ID: </strong>{{nuevos.ID}}</ion-card-title>
+        <ion-card-subtitle><strong>Cedula: </strong>{{nuevos.CEDULA}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div>
+          <h4><strong>Nombres: </strong>{{nuevos.NOMBRES}}</h4>
+        </div>
+        <div>
+          <h4><strong>Apellidos: </strong>{{nuevos.APELLIDOS}}</h4>
+        </div>
+        <div>
+          <h4><strong>Celular: </strong>{{nuevos.CELULAR}}</h4>
+        </div>
+        <div>
+          <h4><strong>Correo Electronico: </strong>{{nuevos.CORREO}}</h4>
+        </div>
+        <div>
+          <h4><strong>Total: </strong>{{nuevos.TOTAL}}</h4>
+        </div>
+        <div>
+          <h4><strong>Direccion: </strong>{{nuevos.DIRECCION}}</h4>
+        </div>
+        <div>
+          <h4><strong>Fecha: </strong>{{nuevos.FECHA}}</h4>
+        </div>
+        <div>
+          <h4><strong>Hora: </strong>{{nuevos.HORA}}</h4>
+        </div>
+        <div *ngIf="admin">
+          <ion-buttons>
+            <ion-button (click)="nuevo = nuevos; enableNuevo = true" shape="round">
+              <ion-icon name="brush" color="primary"></ion-icon>
+            </ion-button>
+            <ion-button (click)="deleteDatos(nuevos)" shape="round">
+              <ion-icon name="trash-outline" color="danger"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-card>
+  <ion-card *ngIf="selectedSegment === 'Quincenal2'">
+    <ion-button expand="block" class="center-items" collapse="true" *ngIf="admin === true" (click)="excelExportQuin2()"
+      color="success" shape="round">
+      <ion-icon name="download" color="light"></ion-icon>
+    </ion-button>
+    <ion-card *ngFor="let nuevos of quincenal2">
+      <ion-card-header>
+        <ion-card-title><strong>ID: </strong>{{nuevos.ID}}</ion-card-title>
+        <ion-card-subtitle><strong>Cedula: </strong>{{nuevos.CEDULA}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div>
+          <h4><strong>Nombres: </strong>{{nuevos.NOMBRES}}</h4>
+        </div>
+        <div>
+          <h4><strong>Apellidos: </strong>{{nuevos.APELLIDOS}}</h4>
+        </div>
+        <div>
+          <h4><strong>Celular: </strong>{{nuevos.CELULAR}}</h4>
+        </div>
+        <div>
+          <h4><strong>Correo Electronico: </strong>{{nuevos.CORREO}}</h4>
+        </div>
+        <div>
+          <h4><strong>Total: </strong>{{nuevos.TOTAL}}</h4>
+        </div>
+        <div>
+          <h4><strong>Direccion: </strong>{{nuevos.DIRECCION}}</h4>
+        </div>
+        <div>
+          <h4><strong>Fecha: </strong>{{nuevos.FECHA}}</h4>
+        </div>
+        <div>
+          <h4><strong>Hora: </strong>{{nuevos.HORA}}</h4>
+        </div>
+        <div *ngIf="admin">
+          <ion-buttons>
+            <ion-button (click)="nuevo = nuevos; enableNuevo = true" shape="round">
+              <ion-icon name="brush" color="primary"></ion-icon>
+            </ion-button>
+            <ion-button (click)="deleteDatos(nuevos)" shape="round">
+              <ion-icon name="trash-outline" color="danger"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-card>
+  <ion-card *ngIf="selectedSegment === 'Mensual'">
+    <ion-button expand="block" class="center-items" collapse="true" *ngIf="admin === true" (click)="excelExportMes()"
+      color="success" shape="round">
+      <ion-icon name="download" color="light"></ion-icon>
+    </ion-button>
+    <ion-card *ngFor="let nuevos of mensual">
+      <ion-card-header>
+        <ion-card-title><strong>ID: </strong>{{nuevos.ID}}</ion-card-title>
+        <ion-card-subtitle><strong>Cedula: </strong>{{nuevos.CEDULA}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div>
+          <h4><strong>Nombres: </strong>{{nuevos.NOMBRES}}</h4>
+        </div>
+        <div>
+          <h4><strong>Apellidos: </strong>{{nuevos.APELLIDOS}}</h4>
+        </div>
+        <div>
+          <h4><strong>Celular: </strong>{{nuevos.CELULAR}}</h4>
+        </div>
+        <div>
+          <h4><strong>Correo Electronico: </strong>{{nuevos.CORREO}}</h4>
+        </div>
+        <div>
+          <h4><strong>Total: </strong>{{nuevos.TOTAL}}</h4>
+        </div>
+        <div>
+          <h4><strong>Direccion: </strong>{{nuevos.DIRECCION}}</h4>
+        </div>
+        <div>
+          <h4><strong>Fecha: </strong>{{nuevos.FECHA}}</h4>
+        </div>
+        <div>
+          <h4><strong>Hora: </strong>{{nuevos.HORA}}</h4>
+        </div>
+        <div *ngIf="admin">
+          <ion-buttons>
+            <ion-button (click)="nuevo = nuevos; enableNuevo = true" shape="round">
+              <ion-icon name="brush" color="primary"></ion-icon>
+            </ion-button>
+            <ion-button (click)="deleteDatos(nuevos)" shape="round">
+              <ion-icon name="trash-outline" color="danger"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-card>
+  <ion-card *ngIf="selectedSegment === 'Semestral1'">
+    <ion-button expand="block" class="center-items" collapse="true" *ngIf="admin === true" (click)="excelExportSeme1()"
+      color="success" shape="round">
+      <ion-icon name="download" color="light"></ion-icon>
+    </ion-button>
+    <ion-card *ngFor="let nuevos of semestral1">
+      <ion-card-header>
+        <ion-card-title><strong>ID: </strong>{{nuevos.ID}}</ion-card-title>
+        <ion-card-subtitle><strong>Cedula: </strong>{{nuevos.CEDULA}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div>
+          <h4><strong>Nombres: </strong>{{nuevos.NOMBRES}}</h4>
+        </div>
+        <div>
+          <h4><strong>Apellidos: </strong>{{nuevos.APELLIDOS}}</h4>
+        </div>
+        <div>
+          <h4><strong>Celular: </strong>{{nuevos.CELULAR}}</h4>
+        </div>
+        <div>
+          <h4><strong>Correo Electronico: </strong>{{nuevos.CORREO}}</h4>
+        </div>
+        <div>
+          <h4><strong>Total: </strong>{{nuevos.TOTAL}}</h4>
+        </div>
+        <div>
+          <h4><strong>Direccion: </strong>{{nuevos.DIRECCION}}</h4>
+        </div>
+        <div>
+          <h4><strong>Fecha: </strong>{{nuevos.FECHA}}</h4>
+        </div>
+        <div>
+          <h4><strong>Hora: </strong>{{nuevos.HORA}}</h4>
+        </div>
+        <div *ngIf="admin">
+          <ion-buttons>
+            <ion-button (click)="nuevo = nuevos; enableNuevo = true" shape="round">
+              <ion-icon name="brush" color="primary"></ion-icon>
+            </ion-button>
+            <ion-button (click)="deleteDatos(nuevos)" shape="round">
+              <ion-icon name="trash-outline" color="danger"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-card>
+  <ion-card *ngIf="selectedSegment === 'Semestral2'">
+    <ion-button expand="block" class="center-items" collapse="true" *ngIf="admin === true" (click)="excelExportSeme2()"
+      color="success" shape="round">
+      <ion-icon name="download" color="light"></ion-icon>
+    </ion-button>
+    <ion-card *ngFor="let nuevos of semestral2">
+      <ion-card-header>
+        <ion-card-title><strong>ID: </strong>{{nuevos.ID}}</ion-card-title>
+        <ion-card-subtitle><strong>Cedula: </strong>{{nuevos.CEDULA}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div>
+          <h4><strong>Nombres: </strong>{{nuevos.NOMBRES}}</h4>
+        </div>
+        <div>
+          <h4><strong>Apellidos: </strong>{{nuevos.APELLIDOS}}</h4>
+        </div>
+        <div>
+          <h4><strong>Celular: </strong>{{nuevos.CELULAR}}</h4>
+        </div>
+        <div>
+          <h4><strong>Correo Electronico: </strong>{{nuevos.CORREO}}</h4>
+        </div>
+        <div>
+          <h4><strong>Total: </strong>{{nuevos.TOTAL}}</h4>
+        </div>
+        <div>
+          <h4><strong>Direccion: </strong>{{nuevos.DIRECCION}}</h4>
+        </div>
+        <div>
+          <h4><strong>Fecha: </strong>{{nuevos.FECHA}}</h4>
+        </div>
+        <div>
+          <h4><strong>Hora: </strong>{{nuevos.HORA}}</h4>
+        </div>
+        <div *ngIf="admin">
+          <ion-buttons>
+            <ion-button (click)="nuevo = nuevos; enableNuevo = true" shape="round">
+              <ion-icon name="brush" color="primary"></ion-icon>
+            </ion-button>
+            <ion-button (click)="deleteDatos(nuevos)" shape="round">
+              <ion-icon name="trash-outline" color="danger"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-card>
+  <ion-card *ngIf="selectedSegment === 'Anual'">
+    <ion-button expand="block" class="center-items" collapse="true" *ngIf="admin === true" (click)="excelExportAno()"
+      color="success" shape="round">
+      <ion-icon name="download" color="light"></ion-icon>
+    </ion-button>
+    <ion-card *ngFor="let nuevos of anual">
+      <ion-card-header>
+        <ion-card-title><strong>ID: </strong>{{nuevos.ID}}</ion-card-title>
+        <ion-card-subtitle><strong>Cedula: </strong>{{nuevos.CEDULA}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div>
+          <h4><strong>Nombres: </strong>{{nuevos.NOMBRES}}</h4>
+        </div>
+        <div>
+          <h4><strong>Apellidos: </strong>{{nuevos.APELLIDOS}}</h4>
+        </div>
+        <div>
+          <h4><strong>Celular: </strong>{{nuevos.CELULAR}}</h4>
+        </div>
+        <div>
+          <h4><strong>Correo Electronico: </strong>{{nuevos.CORREO}}</h4>
+        </div>
+        <div>
+          <h4><strong>Total: </strong>{{nuevos.TOTAL}}</h4>
+        </div>
+        <div>
+          <h4><strong>Direccion: </strong>{{nuevos.DIRECCION}}</h4>
+        </div>
+        <div>
+          <h4><strong>Fecha: </strong>{{nuevos.FECHA}}</h4>
+        </div>
+        <div>
+          <h4><strong>Hora: </strong>{{nuevos.HORA}}</h4>
+        </div>
+        <div *ngIf="admin">
+          <ion-buttons>
+            <ion-button (click)="nuevo = nuevos; enableNuevo = true" shape="round">
+              <ion-icon name="brush" color="primary"></ion-icon>
+            </ion-button>
+            <ion-button (click)="deleteDatos(nuevos)" shape="round">
+              <ion-icon name="trash-outline" color="danger"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-card>
+
 </ion-content>
 <div>
   <ion-item-divider>
@@ -82,7 +434,7 @@
       </ion-button>
     </ion-buttons>
     <div>
-      <ion-button slot="start" (click)="nueva(); enableNuevo = true" color="success" shape="round">
+      <ion-button slot="start" (click)="nueva(); enableNuevo = true" color="primary" shape="round">
         NUEVO
       </ion-button>
     </div>
@@ -93,61 +445,60 @@
         <ion-label position="floating">
           <strong>ID</strong>
         </ion-label>
-        <ion-input [(ngModel)]="nuevo.id" type="string" placeholder="Debe digitar el ID">
+        <ion-input [(ngModel)]="nuevo.ID" type="string" placeholder="Debe digitar el ID">
         </ion-input>
       </ion-item>
       <ion-item lines="none">
         <ion-label position="floating">
           <strong>NOMBRES</strong>
         </ion-label>
-        <ion-textarea [(ngModel)]="nuevo.nombres" enterkeyhint type="text" placeholder="Debe digitar los nombres">
+        <ion-textarea [(ngModel)]="nuevo.NOMBRES" enterkeyhint type="text" placeholder="Debe digitar los nombres">
         </ion-textarea>
       </ion-item>
       <ion-item lines="none">
         <ion-label position="floating">
           <strong>APELLIDOS</strong>
         </ion-label>
-        <ion-textarea [(ngModel)]="nuevo.apellidos" enterkeyhint type="text" placeholder="Debe digitar los apellidos">
+        <ion-textarea [(ngModel)]="nuevo.APELLIDOS" enterkeyhint type="text" placeholder="Debe digitar los apellidos">
         </ion-textarea>
       </ion-item>
       <ion-item lines="none">
         <ion-label position="floating">
           <strong>CORREO</strong>
         </ion-label>
-        <ion-textarea [(ngModel)]="nuevo.correo" enterkeyhint type="email" placeholder="Debe digitar el correo">
+        <ion-textarea [(ngModel)]="nuevo.CORREO" enterkeyhint type="email" placeholder="Debe digitar el correo">
         </ion-textarea>
       </ion-item>
       <ion-item lines="none">
         <ion-label position="floating">
           <strong>CELULAR</strong>
         </ion-label>
-        <ion-input [(ngModel)]="nuevo.celular" type="number" placeholder="Debe digitar el celular">
+        <ion-input [(ngModel)]="nuevo.CELULAR" type="number" placeholder="Debe digitar el celular">
         </ion-input>
       </ion-item>
       <ion-item lines="none">
         <ion-label position="floating">
           <strong>CEDULA</strong>
         </ion-label>
-        <ion-input [(ngModel)]="nuevo.cedula" type="number" placeholder="Debe digitar el cedula">
+        <ion-input [(ngModel)]="nuevo.CEDULA" type="number" placeholder="Debe digitar el cedula">
         </ion-input>
       </ion-item>
       <ion-item lines="none">
         <ion-label position="floating">
           <strong>DIRECCION</strong>
         </ion-label>
-        <ion-input [(ngModel)]="nuevo.direccion" type="text" placeholder="Debe digitar el cedula">
+        <ion-input [(ngModel)]="nuevo.DIRECCION" type="text" placeholder="Debe digitar el cedula">
         </ion-input>
       </ion-item>
       <ion-item lines="none">
         <ion-label position="floating">
           <strong>TOTAL</strong>
         </ion-label>
-        <ion-input [(ngModel)]="nuevo.total" type="text" placeholder="Debe digitar el cedula">
+        <ion-input [(ngModel)]="nuevo.TOTAL" type="text" placeholder="Debe digitar el cedula">
         </ion-input>
       </ion-item>
       <ion-button (click)="guardarDato()" color="primary" shape="round">
-        <ion-icon slot="end" name="save"></ion-icon>
-        Guardar
+        <ion-icon name="save"></ion-icon>
       </ion-button>
     </ion-card>
   </div>

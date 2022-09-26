@@ -1,4 +1,75 @@
 {
-  "indexes": [],
+  "indexes": [
+    {
+      "collectionGroup": "Datos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "`AÑO`",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "ID",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Datos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "DIA",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "ID",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Datos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "MES",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "ID",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Datos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "QUINCENA",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "ID",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Datos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "SEMESTRE",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "ID",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
   "fieldOverrides": []
 }

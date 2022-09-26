@@ -4,5 +4,8 @@ service cloud.firestore {
     match /Datos/{documents=**}{
     	allow read, write: if true;
     }
+    match /Administrador/{documents=**}{
+    	allow read, write: if true;
+    }
   }
 }

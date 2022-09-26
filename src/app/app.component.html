@@ -1,3 +1,8 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <div *ngIf="uid.length">
+    <ion-router-outlet id="main"></ion-router-outlet>
+  </div>
+  <div *ngIf="!uid.length">
+    <ion-router-outlet></ion-router-outlet>
+  </div>
 </ion-app>
