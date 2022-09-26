@@ -62,6 +62,8 @@ import { FileSaverModule } from 'ngx-filesaver';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { UsulogModule } from './usulog/usulog.module';
+import { IonicStorageModule } from '@ionic/storage-angular';
+import { DataService } from './services/data.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -145,7 +147,7 @@ import { UsulogModule } from './usulog/usulog.module';
     })
   ],
 
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, DataService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

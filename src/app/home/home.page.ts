@@ -133,12 +133,14 @@ export class HomePage implements OnInit {
     const path = 'Datos';
     const dateObj = new Date();
     const dia = dateObj.getUTCDate();
+    console.log(dia);
     const day = dateObj.getUTCDate() - 1;
+    console.log(day);
     const mes = dateObj.getUTCMonth() + 1;
     const año = dateObj.getUTCFullYear();
     const diasem = dateObj.getUTCDay();
     const diasemi = dia-diasem;
-    this.firestoreService.getCollectionUnic<Datos>(path, 'DIA', day).subscribe( res => {
+    this.firestoreService.getCollectionUnic<Datos>(path, 'DIA', dia).subscribe( res => {
       this.diario = res;
     });
     this.firestoreService.getCollectionUnic<Datos>(path, 'DIA', diasemi).subscribe( res => {
@@ -256,7 +258,7 @@ export class HomePage implements OnInit {
     const cedula = String(this.nuevo.CEDULA);
     const celular = String(this.nuevo.CELULAR);
     const dateObj = new Date();
-    const dia = dateObj.getUTCDate() - 1;
+    const dia = dateObj.getUTCDate();
     const mes = dateObj.getUTCMonth() + 1;
     const año = dateObj.getUTCFullYear();
     this.nuevo.DIA = dia;
